@@ -1,19 +1,14 @@
 import logging
 import os
 
-import connexion
 import gridfs
 from pymongo import MongoClient
 
 from cert_store import config
 from cert_store.certificate_store import CertificateStore
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 conf = config.get_config()
 
-app = connexion.App(__name__, specification_dir='./swagger/')
-app.add_api('swagger.yaml', arguments={
-    'title': 'API Specification for introductions to a Blockchain Certificate issuer.'})
 
 def create_cert_store():
     mongo_client = MongoClient(host=conf.mongodb_uri)
