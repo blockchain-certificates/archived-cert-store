@@ -1,0 +1,57 @@
+---
+swagger: "2.0"
+info:
+  description: "A sample API that uses a petstore as an example to demonstrate features\
+    \ in the swagger-2.0 specification"
+  version: "1.0.0"
+  title: "Blockchain Certificate Store"
+  termsOfService: "http://helloreverb.com/terms/"
+  contact:
+    name: "Blockchain Certificates team"
+    url: "http://www.blockcerts.org"
+    email: "certs@mit.edu"
+  license:
+    name: "MIT"
+    url: "http://opensource.org/licenses/MIT"
+host: "cert-store.herokuapp.com"
+schemes:
+- "http"
+- "https"
+produces:
+- "application/json"
+- "application/xml"
+- "text/xml"
+- "text/html"
+paths:
+  /certificates/{uid}:
+    get:
+      tags:
+      - "default_controller"
+      description: "Returns a certificate based on a certificate UID"
+      operationId: "cert_store.controllers.default_controller.find_certificate_by_id_uid"
+      parameters:
+      - name: "uid"
+        in: "path"
+        description: "UID of certificate to fetch"
+        required: true
+        type: "string"
+        pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+      responses:
+        200:
+          description: "certificate response"
+        default:
+          description: "unexpected error"
+          schema:
+            $ref: "#/definitions/errorModel"
+definitions:
+  errorModel:
+    type: "object"
+    required:
+    - "code"
+    - "message"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
