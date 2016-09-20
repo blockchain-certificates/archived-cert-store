@@ -28,7 +28,7 @@ paths:
       tags:
       - "default_controller"
       description: "Returns a certificate based on a certificate UID"
-      operationId: "cert_store.controllers.default_controller.find_certificate_by_id_uid"
+      operationId: "cert_store.controllers.default_controller.find_certificate_by_id"
       parameters:
       - name: "uid"
         in: "path"

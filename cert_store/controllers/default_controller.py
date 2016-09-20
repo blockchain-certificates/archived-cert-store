@@ -15,7 +15,7 @@ gfs = gridfs.GridFS(db)
 store = CertificateStore(mongo_client, gfs, db)
 
 
-def find_certificate_by_id_uid(uid):
+def find_certificate_by_id(uid):
     return store.get_certificate(uid)
 
 
