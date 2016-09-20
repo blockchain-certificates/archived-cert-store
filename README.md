@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/blockchain-certificates/cert-intro.svg?branch=master)](https://travis-ci.org/blockchain-certificates/cert-intro)
-[![](https://images.microbadger.com/badges/version/blockcerts/certintro_web.svg)](http://microbadger.com/images/blockcerts/certintro_web "Get your own version badge on microbadger.com")
 
 # cert-store
 
