@@ -14,13 +14,13 @@ with open(os.path.join(here, 'README.md')) as fp:
     long_description = fp.read()
 
 setup(
-    name='cert-intro',
+    name='cert-store',
     version='0.0.1',
-    url='https://github.com/blockchain-certificates/cert-intro',
+    url='https://github.com/blockchain-certificates/cert-store',
     license='MIT',
     author='MIT Media Lab Blockchain Certificates',
     author_email='certs@mit.edu',
-    description='A web app for requesting blockchain certificates',
+    description='A service for retrieving blockchain certificates',
     long_description=long_description,
     packages=find_packages(),
     include_package_data=True,

@@ -1,12 +1,6 @@
 """Retrieves certificates from mongodb and stores certificate requests.  """
 import logging
 
-import gridfs
-from bson.objectid import ObjectId
-from pymongo import MongoClient
-
-from . import config
-
 
 class CertificateStore:
     def __init__(self,

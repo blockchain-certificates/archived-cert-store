@@ -17,9 +17,9 @@ services:
     depends_on:
       - mongodb
 
-  web:
+  certstore:
     build: .
-    image: cert-store:latest
+    image: blockcerts/certstore:latest
     environment:
       - MONGODB_URI=mongodb://mongodb:27017/test
     command: python -u /cert-store/run.py
