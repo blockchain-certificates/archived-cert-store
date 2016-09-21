@@ -18,6 +18,12 @@ class CertificateStore:
         self.db = db
 
     def get_certificate(self, certificate_uid):
+        """
+        Returns certificate as byte array. We need this for v1 certs, which compute a binary hash
+        :param certificate_uid:
+        :return:
+        """
+
         logging.debug('Retrieving certificate for uid=%s', certificate_uid)
         certificate = self.find_certificate_by_uid(uid=certificate_uid)
         if certificate:
@@ -50,8 +56,11 @@ class CertificateStore:
         if certfile:
             contents = certfile.read()
             if isinstance(contents, (bytes, bytearray)):
-                return contents.decode("utf-8")
-            return contents
+                logging.debug('Found certificate for filename=%s', filename)
+                return contents
+            else:
+                logging.error('Found certificate for filename=%s, but contents were not a byte array', filename)
+        logging.warning('Did not find certificate for filename=%s', filename)
         return None
 
     def insert_certificate(self, cert_json):
