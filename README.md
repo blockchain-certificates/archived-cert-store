@@ -89,4 +89,4 @@ docker push blockcerts/certstore:<version>
 
 ## Contact
 
-Contact [certs@mit.edu](mailto:certs@mit.edu) with questions
+Contact [info@blockcerts.org](mailto:info@blockcerts.org) with questions

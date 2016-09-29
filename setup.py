@@ -19,7 +19,7 @@ setup(
     url='https://github.com/blockchain-certificates/cert-store',
     license='MIT',
     author='MIT Media Lab Blockchain Certificates',
-    author_email='certs@mit.edu',
+    author_email='info@blockcerts.org',
     description='A service for retrieving blockchain certificates',
     long_description=long_description,
     packages=find_packages(),
