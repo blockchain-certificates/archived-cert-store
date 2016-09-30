@@ -19,15 +19,13 @@ services:
 
   certstore:
     build: .
-    image: blockcerts/certstore:latest
+    image: blockcerts/cert-store:latest
     environment:
       - MONGODB_URI=mongodb://mongodb:27017/test
     command: python -u /cert-store/run.py
-    volumes:
-      - .:/code
     ports:
       - "5003:5003"
-    depends_on:
-      - mongo-seed
+    #depends_on:
+    #  - mongo-seed
 
 

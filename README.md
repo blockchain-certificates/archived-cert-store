@@ -81,9 +81,9 @@ This project uses tox to validate against several python environments.
 ## Release Docker image
 
 ```
-docker build -t blockcerts/certstore:<version> .
+docker build -t blockcerts/cert-store:latest .
 docker login
-docker push blockcerts/certstore:<version>
+docker push blockcerts/cert-store:latest
 ```
 
 
