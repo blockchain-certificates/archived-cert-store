@@ -17,25 +17,28 @@ class CertificateStore:
         self.gfs = gfs
         self.db = db
 
+
     def get_certificate(self, certificate_uid):
         """
         Returns certificate as byte array. We need this for v1 certs, which compute a binary hash
         :param certificate_uid:
         :return:
         """
-
         logging.debug('Retrieving certificate for uid=%s', certificate_uid)
         certificate = self.find_certificate_by_uid(uid=certificate_uid)
         if certificate:
             raw_file = self.find_file_in_gridfs(certificate_to_filename(certificate))
+            if not raw_file:
+                logging.error('Problem looking up certificate for certificate uid=%s, '
+                              'but certificate metadata was found', certificate_uid)
+                return None
         else:
             logging.warning(
                 'Certificate metadata not found for certificate uid=%s',
                 certificate_uid)
+            return None
 
-        if certificate and not raw_file:
-            logging.error('Problem looking up certificate for certificate uid=%s, '
-                          'but certificate metadata was found', certificate_uid)
+        logging.debug('Found certificate for uid=%s', certificate_uid)
         return raw_file
 
 
