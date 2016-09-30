@@ -1,3 +1,4 @@
+[![PyPI version](https://badge.fury.io/py/cert-store.svg)](https://badge.fury.io/py/cert-store)
 
 # cert-store
 
