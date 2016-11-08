@@ -13,8 +13,6 @@ def create_config():
     p.add('-c', '--my-config', required=False, is_config_file=True, help='config file path')
     p.add_argument('--mongodb_uri', default='mongodb://localhost:27017/test', type=str, env_var='MONGODB_URI',
                    help='Mongo connection string, including db containing certificates')
-    p.add_argument('--log_dir', type=str, env_var='LOG_DIR', help='application log directory')
-    p.add_argument('--log_file_name', type=str, env_var='LOG_FILE_NAME', help='application log file name')
     args, _ = p.parse_known_args()
     return args
 

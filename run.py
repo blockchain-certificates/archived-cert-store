@@ -11,10 +11,7 @@ from cert_store import config
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
-def main(args=None):
-    """The main routine."""
-    if args is None:
-        args = sys.argv[1:]
+def main():
 
     conf = config.get_config()
     cert_store.initialize_logger(conf)

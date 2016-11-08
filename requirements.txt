@@ -3,3 +3,4 @@ tox>=2.3.1
 Flask-PyMongo>=0.4.1
 swagger-parser>=0.1.10
 configargparse==0.10.0
+simplekv>=0.10.0
