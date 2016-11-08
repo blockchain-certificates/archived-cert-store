@@ -15,12 +15,12 @@ with open(os.path.join(here, 'README.md')) as fp:
 
 setup(
     name='cert-store',
-    version='0.0.7',
+    version='0.0.9',
     url='https://github.com/blockchain-certificates/cert-store',
     license='MIT',
     author='MIT Media Lab Blockchain Certificates',
     author_email='info@blockcerts.org',
-    description='A service for retrieving blockchain certificates',
+    description='A library for retrieving blockchain certificates',
     long_description=long_description,
     packages=find_packages(),
     include_package_data=True,

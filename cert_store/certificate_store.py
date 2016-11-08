@@ -14,30 +14,23 @@ class CertificateStore:
 
     def get_certificate(self, certificate_uid):
         """
-        Returns certificate as json.
+        Returns certificate as json. Propagates KeyError if key isn't found
         :param certificate_uid:
         :return:
         """
         logging.debug('Retrieving certificate for uid=%s', certificate_uid)
-        cert_file_bytes = self._get_certificate_raw(certificate_uid_to_filename(certificate_uid))
-        if not cert_file_bytes:
-            logging.warning('Could not find certificate for certificate uid=%s', certificate_uid)
-            return None
+        cert_file_bytes = self._get_certificate_raw(certificate_uid)
         cert_string = cert_file_bytes.decode('utf-8')
+        logging.debug('Found certificate for uid=%s', certificate_uid)
         return json.loads(cert_string)
 
     def _get_certificate_raw(self, certificate_uid):
         """
-        Returns certificate as raw bytes.
+        Returns certificate as raw bytes. Per kvstore contract, raises an KeyError if key isn't found.
         :param certificate_uid:
         :return:
         """
-        logging.debug('Retrieving certificate for uid=%s', certificate_uid)
         cert_file_bytes = self.kv_store.get(certificate_uid_to_filename(certificate_uid))
-        if not cert_file_bytes:
-            logging.warning('Could not find certificate for certificate uid=%s', certificate_uid)
-            return None
-        logging.debug('Found certificate for uid=%s', certificate_uid)
         return cert_file_bytes
 
 
@@ -55,27 +48,21 @@ class CertificateStoreV1(CertificateStore):
 
     def get_certificate_v1(self, certificate_uid):
         """
-        Returns certificate as byte array. We need this for v1 certs, which compute a binary hash
+        Returns certificate as byte array. We need this for v1 certs, which compute a binary hash. Raises
+        KeyError if not found
         :param certificate_uid:
         :return:
         """
         logging.debug('Retrieving certificate for uid=%s', certificate_uid)
         certificate = self._find_certificate_by_uid(uid=certificate_uid)
         if certificate:
-            cert_file_bytes = self._get_certificate_raw(certificate_uid_to_filename(certificate_uid))
-            if not cert_file_bytes:
-                logging.error(
-                    'Could not find certificate for certificate uid=%s, but certificate metadata was found',
-                    certificate_uid)
-                return None, None
-        else:
-            logging.warning(
-                'Certificate metadata not found for certificate uid=%s',
-                certificate_uid)
-            return None, None
+            cert_file_bytes = self._get_certificate_raw(certificate_uid)
+            logging.debug('Found certificate for uid=%s', certificate_uid)
+            return certificate, cert_file_bytes
 
-        logging.debug('Found certificate for uid=%s', certificate_uid)
-        return certificate, cert_file_bytes
+        message = 'Certificate metadata not found for certificate uid=%s' % certificate_uid
+        logging.error(message)
+        raise KeyError(message)
 
     def _find_certificate_by_uid(self, uid=None):
         """
@@ -83,7 +70,5 @@ class CertificateStoreV1(CertificateStore):
         :param uid: certificate uid
         :return: certificate from certificates collection
         """
-        certificate = None
-        if uid:
-            certificate = self.db.certificates.find_one({'uid': uid})
+        certificate = self.db.certificates.find_one({'uid': uid})
         return certificate
