@@ -1,4 +1,4 @@
-class BlockcertVersion:
+class BlockcertVersion(object):
     V1_1 = 0
     V1_2 = 1
 
@@ -45,6 +45,7 @@ class V1_2_BlockchainCertificate(object):
             self.subtitle = certificate['subtitle']
         else:
             self.subtitle = None
+        self.certificate_json = json_certificate
 
 
 class V1_1_BlockchainCertificate(object):

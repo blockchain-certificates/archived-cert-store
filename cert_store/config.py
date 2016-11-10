@@ -13,6 +13,9 @@ def create_config():
     p.add('-c', '--my-config', required=False, is_config_file=True, help='config file path')
     p.add_argument('--mongodb_uri', default='mongodb://localhost:27017/test', type=str, env_var='MONGODB_URI',
                    help='Mongo connection string, including db containing certificates')
+    p.add_argument('--cert_store_type', type=str, help='type of key value store to use for Cert Store')
+    p.add_argument('--cert_store_path', type=str, help='path to file system Cert Store')
+    p.add_argument('--v1_aware', action='store_true', help='Whether to support v1 certs')
     args, _ = p.parse_known_args()
     return args
 

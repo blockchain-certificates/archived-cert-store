@@ -22,9 +22,9 @@ class CertificateStore:
         """
         self.kv_store = kv_store
 
-    def get_certificate_model(self, certificate_uid):
+    def get_certificate(self, certificate_uid):
         """
-        Returns a displayable certificate. Propagates KeyError if key isn't found
+        Returns a certificate. Propagates KeyError if key isn't found
         :param certificate_uid:
         :return:
         """

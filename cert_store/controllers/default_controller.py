@@ -1,8 +1,8 @@
-import json
+from flask import jsonify
+
 
 
 def find_certificate_by_id(uid):
-    from cert_store import cert_store_connection
-    cert_raw = cert_store_connection.get_certificate_json(uid)
-    cert_string = cert_raw.decode('utf-8')
-    return json.loads(cert_string)
+    from cert_store import cert_store
+    certificate_json = cert_store.get_certificate_json(uid)
+    return jsonify(certificate_json)
