@@ -20,7 +20,6 @@ ADD requirements.txt /cert-store/requirements.txt
 
 # Add the script that will start everything.
 ADD run.py /cert-store/run.py
-#ADD /cert-store/app.py /cert-store/app.py
 
 # Run VirtualEnv.
 RUN virtualenv /cert-store/env/
@@ -31,3 +30,5 @@ RUN /cert-store/env/bin/pip install -r /cert-store/requirements.txt
 COPY . /cert-store
 
 RUN pip install /cert-store
+
+ADD cert_data /etc/cert_data
