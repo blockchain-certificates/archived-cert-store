@@ -1,13 +1,18 @@
-import logging
+import logging.config
+import os
 
 import gridfs
 from pymongo import MongoClient
-from cert_store.gridfs_key_value_store import GridfsKeyValueStore
+
 from cert_store.certificate_store import CertificateStore
+from cert_store.gridfs_key_value_store import GridfsKeyValueStore
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 
 cert_store_connection = None
-logging.config.fileConfig('logging.conf')
+logging.config.fileConfig(os.path.join(BASE_DIR, 'logging.conf'))
 log = logging.getLogger(__name__)
+
 
 def set_cert_store(conf):
     global cert_store_connection

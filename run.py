@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import os
-import sys
 
 import connexion
 
@@ -12,7 +11,6 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 def main():
-
     conf = config.get_config()
     cert_store.initialize_logger(conf)
     cert_store.set_cert_store(conf)
