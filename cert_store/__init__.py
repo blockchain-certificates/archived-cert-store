@@ -10,8 +10,7 @@ from cert_store.gridfs_key_value_store import GridfsKeyValueStore
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 
 cert_store_connection = None
-logging.config.fileConfig(os.path.join(BASE_DIR, 'logging.conf'))
-log = logging.getLogger(__name__)
+log = None
 
 
 def set_cert_store(conf):
@@ -21,3 +20,10 @@ def set_cert_store(conf):
     gfs = gridfs.GridFS(db)
     gfs_conn = GridfsKeyValueStore(gfs)
     cert_store_connection = CertificateStore(gfs_conn)
+
+
+def configure_app(conf):
+    logging.config.fileConfig(os.path.join(BASE_DIR, 'logging.conf'))
+    global log
+    log = logging.getLogger(__name__)
+    set_cert_store(conf)

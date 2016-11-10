@@ -9,13 +9,12 @@ here = os.path.abspath(os.path.dirname(__file__))
 install_reqs = parse_requirements('requirements.txt', session=False)
 reqs = [str(ir.req) for ir in install_reqs]
 
-
 with open(os.path.join(here, 'README.md')) as fp:
     long_description = fp.read()
 
 setup(
     name='cert-store',
-    version='0.0.10',
+    version='0.0.11',
     url='https://github.com/blockchain-certificates/cert-store',
     license='MIT',
     author='MIT Media Lab Blockchain Certificates',

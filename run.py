@@ -12,8 +12,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 def main():
     conf = config.get_config()
-    cert_store.initialize_logger(conf)
-    cert_store.set_cert_store(conf)
+    cert_store.configure_app(conf)
     port = int(os.environ.get('PORT', 5003))
     app = connexion.App(__name__, specification_dir=os.path.join(BASE_DIR, 'cert_store', 'swagger'))
     app.add_api('swagger.yaml', arguments={
