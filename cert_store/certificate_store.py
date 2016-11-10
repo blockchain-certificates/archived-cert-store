@@ -41,7 +41,7 @@ class CertificateStore:
         certificate_bytes = self._get_certificate_raw(certificate_uid)
         logging.debug('Found certificate for uid=%s', certificate_uid)
         certificate_json = certificate_bytes_to_json(certificate_bytes)
-        return model.to_certificate_model(certificate_json)
+        return certificate_json
 
     def _get_certificate_raw(self, certificate_uid):
         """
