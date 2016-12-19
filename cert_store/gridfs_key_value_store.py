@@ -20,11 +20,10 @@ class GridfsKeyValueStore(KeyValueStore):
     def _open(self, key):
         the_file = self.gfs.find_one({'filename': key})
         if the_file:
-            contents = the_file.read()
             logging.debug('Found content for key=%s', key)
-            return contents
+            return the_file
 
-        message = 'Did not find content for key=%s', key
+        message = 'Did not find content for key={}'.format(key)
         logging.error(message)
         raise KeyError(message)
 
