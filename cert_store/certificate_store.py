@@ -63,7 +63,7 @@ class V1AwareCertificateStore(CertificateStore):
         :param kv_store: key value store; subclass of KeyValueStore
         :param db: certificates mongodb table (stores txid for verifying v1 certificates)
         """
-        super(CertificateStore, self).__init__(kv_store)
+        super(V1AwareCertificateStore, self).__init__(kv_store)
         self.db = db
 
     def get_certificate_model(self, certificate_uid):
