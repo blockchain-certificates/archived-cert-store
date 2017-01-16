@@ -1,3 +1,10 @@
+import re
+
+
+V1_1_REGEX = re.compile('[0-9a-fA-F]{24}')
+V1_2_REGEX = re.compile('[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
+
+
 class BlockcertVersion(object):
     V1_1 = 0
     V1_2 = 1
@@ -11,6 +18,13 @@ def detect_version(certificate_json):
     version_marker = context.rfind('/')
     version = context[version_marker + 1:]
     if version == 'v1':
+        return BlockcertVersion.V1_2
+    raise Exception('Unknown Blockchain Certificate version')
+
+def detect_version_from_uid(uid):
+    if V1_1_REGEX.search(uid):
+        return BlockcertVersion.V1_1
+    elif V1_2_REGEX.search(uid):
         return BlockcertVersion.V1_2
     raise Exception('Unknown Blockchain Certificate version')
 

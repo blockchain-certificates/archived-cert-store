@@ -3,6 +3,7 @@ import json
 import logging
 
 from cert_store import model
+from cert_store.model import BlockcertVersion
 
 
 def certificate_uid_to_filename(uid):
@@ -66,7 +67,7 @@ class V1AwareCertificateStore(CertificateStore):
         super(V1AwareCertificateStore, self).__init__(kv_store)
         self.db = db
 
-    def get_certificate_model(self, certificate_uid):
+    def get_certificate(self, certificate_uid):
         """
         Returns certificate as byte array. We need this for v1 certs, which compute a binary hash. Raises
         KeyError if not found
@@ -74,17 +75,23 @@ class V1AwareCertificateStore(CertificateStore):
         :return:
         """
         logging.debug('Retrieving certificate for uid=%s', certificate_uid)
-        certificate = self._find_certificate_by_uid(uid=certificate_uid)
+
+        version = model.detect_version_from_uid(certificate_uid)
+        if version == BlockcertVersion.V1_2:
+            return super(V1AwareCertificateStore, self).get_certificate(certificate_uid)
+
+        # else it's V1.1 (if not valid, it will throw)
+        certificate = self._find_certificate_metadata(uid=certificate_uid)
         if certificate:
             certificate_bytes = self._get_certificate_raw(certificate_uid)
             certificate_json = certificate_bytes_to_json(certificate_bytes)
-            return model.to_certificate_model(certificate_json, certificate.txid, certificate_bytes)
+            return model.to_certificate_model(certificate_json, certificate['txid'], certificate_bytes)
 
         message = 'Certificate metadata not found for certificate uid=%s' % certificate_uid
         logging.error(message)
         raise KeyError(message)
 
-    def _find_certificate_by_uid(self, uid=None):
+    def _find_certificate_metadata(self, uid=None):
         """
         Find certificate by certificate uid
         :param uid: certificate uid
