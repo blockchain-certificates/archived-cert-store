@@ -2,18 +2,12 @@
 import json
 import logging
 
-from cert_store import model
-from cert_store.model import BlockcertVersion
+from cert_core import helpers, model
+from cert_core.model import BlockcertVersion
 
 
 def certificate_uid_to_filename(uid):
     return uid + '.json'
-
-
-def certificate_bytes_to_json(cert_file_bytes):
-    cert_string = cert_file_bytes.decode('utf-8')
-    cert_json = json.loads(cert_string)
-    return cert_json
 
 
 class CertificateStore:
@@ -41,7 +35,7 @@ class CertificateStore:
         logging.debug('Retrieving certificate for uid=%s', certificate_uid)
         certificate_bytes = self._get_certificate_raw(certificate_uid)
         logging.debug('Found certificate for uid=%s', certificate_uid)
-        certificate_json = certificate_bytes_to_json(certificate_bytes)
+        certificate_json = helpers.certificate_bytes_to_json(certificate_bytes)
         return certificate_json
 
     def _get_certificate_raw(self, certificate_uid):
@@ -84,7 +78,7 @@ class V1AwareCertificateStore(CertificateStore):
         certificate = self._find_certificate_metadata(uid=certificate_uid)
         if certificate:
             certificate_bytes = self._get_certificate_raw(certificate_uid)
-            certificate_json = certificate_bytes_to_json(certificate_bytes)
+            certificate_json = helpers.certificate_bytes_to_json(certificate_bytes)
             return model.to_certificate_model(certificate_json, certificate['txid'], certificate_bytes)
 
         message = 'Certificate metadata not found for certificate uid=%s' % certificate_uid
