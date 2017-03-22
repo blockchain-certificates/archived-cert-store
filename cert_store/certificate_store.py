@@ -1,5 +1,4 @@
 """Retrieves certificates from mongodb."""
-import json
 import logging
 
 from cert_core import helpers, model

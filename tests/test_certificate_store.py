@@ -13,6 +13,7 @@ class TestModel(unittest.TestCase):
         cert_store = CertificateStore(kv_store)
         cert = cert_store.get_certificate('609c2989-275f-4f4c-ab02-b245cfb09017')
         self.assertIsNotNone(cert)
+        self.assertEquals('Game of thrones issuer', cert.organization)
 
 
 if __name__ == '__main__':
