@@ -2,7 +2,6 @@
 import logging
 
 from cert_core import helpers, model
-from cert_core.model import BlockcertVersion
 
 
 def certificate_uid_to_filename(uid):
@@ -69,8 +68,8 @@ class V1AwareCertificateStore(CertificateStore):
         """
         logging.debug('Retrieving certificate for uid=%s', certificate_uid)
 
-        version = model.detect_version_from_uid(certificate_uid)
-        if version == BlockcertVersion.V1_2:
+        is_v1_uid = model.is_v1_uid(certificate_uid)
+        if not is_v1_uid:
             return super(V1AwareCertificateStore, self).get_certificate(certificate_uid)
 
         # else it's V1.1 (if not valid, it will throw)
