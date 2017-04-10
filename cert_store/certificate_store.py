@@ -2,6 +2,7 @@
 import logging
 
 from cert_core import helpers, model
+from cert_core.model import URN_UUID_PREFIX
 
 
 def certificate_uid_to_filename(uid):
@@ -30,9 +31,14 @@ class CertificateStore:
         :param certificate_uid:
         :return:
         """
-        logging.debug('Retrieving certificate for uid=%s', certificate_uid)
-        certificate_bytes = self._get_certificate_raw(certificate_uid)
-        logging.debug('Found certificate for uid=%s', certificate_uid)
+
+        if certificate_uid.startswith(URN_UUID_PREFIX):
+            uid = certificate_uid[len(URN_UUID_PREFIX):]
+        else:
+            uid = certificate_uid
+        logging.debug('Retrieving certificate for uid=%s', uid)
+        certificate_bytes = self._get_certificate_raw(uid)
+        logging.debug('Found certificate for uid=%s', uid)
         certificate_json = helpers.certificate_bytes_to_json(certificate_bytes)
         return certificate_json
 
