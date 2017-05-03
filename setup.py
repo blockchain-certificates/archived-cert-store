@@ -3,7 +3,6 @@ import os
 from pip.req import parse_requirements
 from setuptools import setup, find_packages
 
-
 here = os.path.abspath(os.path.dirname(__file__))
 
 install_reqs = parse_requirements('requirements.txt', session=False)
@@ -14,10 +13,10 @@ with open(os.path.join(here, 'README.md')) as fp:
 
 setup(
     name='cert-store',
-    version='0.0.30',
+    version='2.0b6',
     url='https://github.com/blockchain-certificates/cert-store',
     license='MIT',
-    author='MIT Media Lab Blockchain Certificates',
+    author='Blockcerts',
     author_email='info@blockcerts.org',
     description='A library for retrieving blockchain certificates',
     long_description=long_description,
