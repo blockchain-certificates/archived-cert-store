@@ -1,4 +1,5 @@
 
+[![Build Status](https://travis-ci.org/blockchain-certificates/cert-store.svg?branch=master)](https://travis-ci.org/blockchain-certificates/cert-store)
 [![PyPI version](https://badge.fury.io/py/cert-store.svg)](https://badge.fury.io/py/cert-store)
 
 
