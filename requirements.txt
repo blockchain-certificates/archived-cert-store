@@ -1,7 +1,7 @@
-connexion>=1.0.109
-tox>=2.3.1
-Flask-PyMongo>=0.4.1
-swagger-parser>=0.1.10
+cert-schema==2.0b18
 configargparse==0.10.0
+connexion>=1.0.109
+Flask-PyMongo>=0.4.1
 simplekv>=0.10.0
-cert-core>=2.0b7
+swagger-parser>=0.1.10
+tox>=2.7.0
