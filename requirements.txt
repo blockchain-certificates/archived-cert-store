@@ -1,4 +1,4 @@
-cert-schema>=2.0b19
+cert-schema>=2.0b20
 configargparse>=0.12.0
 connexion>=1.0.109
 Flask-PyMongo>=0.4.1
