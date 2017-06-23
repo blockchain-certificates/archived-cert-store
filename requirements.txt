@@ -1,5 +1,5 @@
-cert-schema==2.0b18
-configargparse==0.10.0
+cert-schema>=2.0b19
+configargparse>=0.12.0
 connexion>=1.0.109
 Flask-PyMongo>=0.4.1
 simplekv>=0.10.0
