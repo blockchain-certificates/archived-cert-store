@@ -54,7 +54,7 @@ The `--v1_aware` flag allows support for these certificates.
 
 This project uses tox to validate against several python environments.
 
-1. Ensure you have an python environment. [Recommendations](https://github.com/blockchain-certificates/developer-common-docs/blob/master/virtualenv.md)
+1. Ensure you have an python environment. [Recommendations](https://github.com/blockchain-certificates/cert-issuer/blob/master/docs/virtualenv.md)
 
 2. Run tests
     ```
