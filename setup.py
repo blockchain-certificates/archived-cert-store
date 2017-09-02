@@ -13,7 +13,7 @@ with open(os.path.join(here, 'README.md')) as fp:
 
 setup(
     name='cert-store',
-    version='2.0.2',
+    version='2.0.3',
     url='https://github.com/blockchain-certificates/cert-store',
     license='MIT',
     author='Blockcerts',

@@ -1,5 +1,5 @@
 enum34>=1.1.6;python_version<"3.4"
-cert-schema>=2.0.2
+cert-schema>=2.0.3
 configargparse>=0.12.0
 connexion>=1.1.14
 Flask-PyMongo>=0.5.1
